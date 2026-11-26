@@ -66,28 +66,70 @@ nav.main .drop a{font-weight:500;padding:9px 20px}
 .menu-btn{display:none;background:none;border:2px solid var(--ink);width:46px;height:42px;cursor:pointer}
 .menu-btn span{display:block;width:20px;height:2px;background:var(--ink);margin:4px auto}
 
-/* hero with the cleaning-pass reveal */
-.hero{position:relative;min-height:min(86vh,760px);overflow:hidden;background:var(--ink);color:#fff;display:flex;align-items:flex-end}
-.hero .layer{position:absolute;inset:0;background:url("images/hero-living-room.jpg") center 62%/cover no-repeat}
-.hero .dull{filter:grayscale(.85) brightness(.55) sepia(.25)}
-.hero .clean{filter:brightness(1.55) contrast(1.06) saturate(1.1);
+/* hero: cleaning-pass reveal, steam, service rail */
+.hero{position:relative;min-height:min(100vh,880px);overflow:hidden;background:#021b24;color:#fff;display:flex;flex-direction:column}
+.hero .stage{position:absolute;inset:0;animation:drift-in 16s ease-out forwards;transform:scale(1.12)}
+@keyframes drift-in{to{transform:scale(1)}}
+.hero .layer{position:absolute;inset:0;background:url("images/hero-living-room.jpg") center 70%/cover no-repeat}
+.hero .dull{filter:grayscale(.9) brightness(.42) sepia(.35) contrast(.9)}
+.hero .clean{filter:saturate(1.05);
   -webkit-mask-image:linear-gradient(100deg,#000 0 46%,transparent 54% 100%);mask-image:linear-gradient(100deg,#000 0 46%,transparent 54% 100%);
   -webkit-mask-size:260% 100%;mask-size:260% 100%;-webkit-mask-position:100% 0;mask-position:100% 0;
-  animation:pass 3.2s cubic-bezier(.6,.05,.25,1) .5s forwards}
+  animation:pass 3.4s cubic-bezier(.6,.05,.25,1) .4s forwards}
 @keyframes pass{to{-webkit-mask-position:0 0;mask-position:0 0}}
-.hero .wand{position:absolute;top:-10%;bottom:-10%;width:3px;left:-5%;background:linear-gradient(transparent,var(--mist),#fff,var(--mist),transparent);box-shadow:0 0 28px 8px rgba(182,216,226,.55);transform:rotate(10deg);opacity:0;animation:wand 3.2s cubic-bezier(.6,.05,.25,1) .5s forwards}
+.hero .wand{position:absolute;top:-10%;bottom:-10%;width:4px;left:-5%;background:linear-gradient(transparent,var(--mist),#fff,var(--mist),transparent);box-shadow:0 0 40px 14px rgba(182,216,226,.55);transform:rotate(10deg);opacity:0;animation:wand 3.4s cubic-bezier(.6,.05,.25,1) .4s forwards;z-index:2}
 @keyframes wand{0%{left:-5%;opacity:0}8%{opacity:1}85%{opacity:1}100%{left:108%;opacity:0}}
-.hero .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.78) 0%,rgba(0,0,0,.45) 42%,rgba(0,0,0,0) 70%),linear-gradient(0deg,rgba(0,0,0,.55),transparent 45%)}
-.hero .wrap{position:relative;z-index:2;padding:110px 0 70px;display:grid;grid-template-columns:minmax(0,640px) 1fr;align-items:end;gap:40px}
-.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(48px,7.4vw,104px);line-height:.98;letter-spacing:-.01em;opacity:0;transform:translateY(18px);animation:rise .9s ease 2.4s forwards}
-.hero .lede{font-size:19px;max-width:30em;margin:26px 0 34px;color:#e4eef1;opacity:0;animation:rise .9s ease 2.65s forwards}
-.hero .ctas{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:rise .9s ease 2.85s forwards}
-.hero .rule{color:var(--mist);width:180px;margin-bottom:28px;opacity:0;animation:rise .9s ease 2.2s forwards}
-@keyframes rise{to{opacity:1;transform:none}}
-.seal{justify-self:end;width:170px;height:170px;border-radius:50%;border:2px solid var(--mist);display:grid;place-items:center;text-align:center;position:relative;opacity:0;animation:rise .9s ease 3.1s forwards}
-.seal::before{content:"";position:absolute;inset:8px;border-radius:50%;border:1px solid rgba(182,216,226,.5)}
-.seal small{display:block;font-size:13px;letter-spacing:.08em;color:var(--mist)}
-.seal b{display:block;font-family:var(--display);font-weight:400;font-size:46px;line-height:1}
+.hero .shade{position:absolute;inset:0;background:
+  linear-gradient(90deg,rgba(2,27,36,.94) 0%,rgba(2,27,36,.78) 34%,rgba(2,27,36,.25) 62%,rgba(2,27,36,.55) 100%),
+  linear-gradient(0deg,rgba(2,27,36,.85),transparent 40%)}
+#steam{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:.85}
+.hero-main{position:relative;z-index:3;flex:1;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,420px);gap:60px;align-items:center;padding:90px 0 60px}
+.hero .kicker{display:flex;align-items:center;gap:16px;color:var(--mist);font-weight:600;font-size:15px;margin-bottom:26px;opacity:0;animation:rise .8s ease 2.3s forwards}
+.hero .kicker .rule{width:70px;color:var(--mist)}
+.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(54px,8.2vw,126px);line-height:.94;letter-spacing:-.015em}
+.hero h1 .ln{display:block;overflow:hidden;padding-bottom:.06em}
+.hero h1 .ln span{display:block;transform:translateY(110%);animation:lineup 1.1s cubic-bezier(.2,.8,.2,1) forwards}
+.hero h1 .ln:nth-child(1) span{animation-delay:2.4s}
+.hero h1 .ln:nth-child(2) span{animation-delay:2.55s;color:var(--mist)}
+@keyframes lineup{to{transform:none}}
+.hero .lede{font-size:19px;max-width:31em;margin:30px 0 38px;color:#d7e7ec;opacity:0;animation:rise .9s ease 2.9s forwards}
+.hero .ctas{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:rise .9s ease 3.1s forwards}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.btn-petrol{position:relative;overflow:hidden}
+.btn-petrol::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);animation:sheen 4.5s ease 4s infinite}
+@keyframes sheen{0%{left:-60%}22%,100%{left:130%}}
+/* service rail */
+.rail{background:rgba(3,48,63,.55);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);border:1px solid rgba(182,216,226,.28);padding:28px 28px 22px;opacity:0;transform:translateX(40px);animation:slidein 1s cubic-bezier(.2,.8,.2,1) 3.2s forwards;position:relative}
+@keyframes slidein{to{opacity:1;transform:none}}
+.rail::before{content:"";position:absolute;left:-1px;top:-1px;width:60px;height:4px;background:var(--mist)}
+.rail h2{font-family:var(--display);font-weight:400;font-size:24px;margin-bottom:6px}
+.rail .sub{font-size:14.5px;color:#b8d2da;margin-bottom:14px}
+.rail a.svc{display:grid;grid-template-columns:46px 1fr 20px;gap:16px;align-items:center;padding:16px 0;border-top:1px solid rgba(182,216,226,.2);text-decoration:none;transition:padding .25s}
+.rail a.svc:hover{padding-left:8px}
+.rail .ic{width:46px;height:46px;border:1px solid rgba(182,216,226,.45);display:grid;place-items:center;transition:background .25s}
+.rail a.svc:hover .ic{background:var(--petrol)}
+.rail .ic svg{width:24px;height:24px;fill:none;stroke:var(--mist);stroke-width:1.5}
+.rail b{display:block;font-weight:600;font-size:16.5px}
+.rail small{color:#a9c6cf;font-size:13.5px}
+.rail .arr{width:18px;height:18px;fill:none;stroke:var(--mist);stroke-width:2}
+.rail .call{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px;padding:16px 18px;background:#fff;color:var(--ink);text-decoration:none}
+.rail .call span{font-size:13.5px;color:var(--muted);display:block}
+.rail .call b{font-family:var(--display);font-weight:400;font-size:24px;letter-spacing:.01em}
+.rail .call svg{width:34px;height:34px;padding:7px;background:var(--petrol);fill:none;stroke:#fff;stroke-width:2}
+/* seal with turning ring */
+.seal{position:absolute;z-index:3;left:50%;bottom:118px;width:150px;height:150px;opacity:0;animation:rise 1s ease 3.6s forwards}
+.seal svg.ring{position:absolute;inset:0;animation:spin 26s linear infinite}
+.seal text{font:600 10.5px var(--body);letter-spacing:.22em;fill:var(--mist)}
+.seal .core{position:absolute;inset:30px;border-radius:50%;background:var(--petrol);display:grid;place-items:center;text-align:center;box-shadow:0 0 0 1px rgba(182,216,226,.5),0 14px 40px rgba(0,0,0,.4)}
+.seal .core b{font-family:var(--display);font-weight:400;font-size:30px;line-height:1}
+.seal .core small{display:block;font-size:11px;color:var(--mist)}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* ribbon */
+.ribbon{position:relative;z-index:3;background:var(--petrol);border-top:1px solid rgba(182,216,226,.35);overflow:hidden;white-space:nowrap}
+.ribbon .track{display:inline-flex;animation:marquee 38s linear infinite;padding:18px 0}
+.ribbon span{font-family:var(--display);font-size:22px;padding:0 26px;display:inline-flex;align-items:center;gap:52px}
+.ribbon span::after{content:"";width:10px;height:10px;background:var(--mist);transform:rotate(45deg);display:inline-block}
+@keyframes marquee{to{transform:translateX(-50%)}}
 
 /* services: asymmetric spread */
 .services{padding:110px 0 100px;background:var(--frost);position:relative}
@@ -136,34 +178,49 @@ nav.main .drop a{font-weight:500;padding:9px 20px}
 .facts b{display:block;font-family:var(--display);font-weight:400;font-size:22px;color:var(--ink);line-height:1.2}
 .facts span{font-size:14.5px;color:var(--muted)}
 
-/* why choose */
-.why{position:relative;color:#fff;padding:120px 0;overflow:hidden;background:var(--deep)}
-.why::before{content:"";position:absolute;inset:0;background:url("images/truck-mounted-cleaning.jpg") center/cover;opacity:.35}
-.why::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--deep) 30%,rgba(3,48,63,.6))}
-.why .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start}
-.why h2{color:#fff;margin-bottom:24px}
-.why p{color:#d3e6eb;margin-bottom:16px;max-width:34em}
-.why p a{color:#fff;font-weight:700}
-.points{list-style:none;counter-reset:none}
-.points li{position:relative;padding:26px 0 26px 0;font-family:var(--display);font-size:clamp(24px,2.6vw,34px);line-height:1.15;display:flex;align-items:center;gap:22px}
-.points li .line{flex:1;height:6px;border-top:2px solid var(--mist);border-bottom:2px solid var(--mist);position:relative;transform:scaleX(0);transform-origin:left;transition:transform 1.1s cubic-bezier(.3,.7,.2,1)}
-.points li .line::after{content:"";position:absolute;right:0;top:-6px;width:10px;height:14px;background:var(--mist)}
+/* why choose: light, with van photo */
+.why{background:#fff;padding:0;border-top:1px solid #dbe7ea}
+.why .grid{display:grid;grid-template-columns:1.05fr .95fr;min-height:640px}
+.why .txt{padding:110px 70px 110px max(24px,calc((100vw - var(--wrap))/2))}
+.why h2{color:var(--ink);margin-bottom:24px}
+.why p{color:var(--muted);margin-bottom:16px;max-width:34em}
+.why p a{color:var(--petrol);font-weight:700}
+.why .pic{position:relative;overflow:hidden}
+.why .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:92% center}
+.why .pic::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.25),transparent 30%)}
+.points{list-style:none;margin-top:30px}
+.points li{position:relative;padding:20px 0;font-family:var(--display);font-size:clamp(22px,2.2vw,30px);line-height:1.15;display:flex;align-items:center;gap:22px;color:var(--ink)}
+.points li .line{flex:1;height:6px;border-top:2px solid var(--petrol);border-bottom:2px solid var(--petrol);position:relative;transform:scaleX(0);transform-origin:left;transition:transform 1.1s cubic-bezier(.3,.7,.2,1)}
+.points li .line::after{content:"";position:absolute;right:0;top:-6px;width:10px;height:14px;background:var(--petrol)}
 .points.in li .line{transform:scaleX(1)}
 .points.in li:nth-child(2) .line{transition-delay:.15s}
 .points.in li:nth-child(3) .line{transition-delay:.3s}
 .points.in li:nth-child(4) .line{transition-delay:.45s}
-.points li+li{border-top:1px solid rgba(182,216,226,.2)}
+.points li+li{border-top:1px solid #dbe7ea}
 
-/* testimonial */
-.voice{padding:120px 0;background:var(--mist);position:relative;overflow:hidden}
-.voice .wrap{display:grid;grid-template-columns:240px 1fr;gap:60px}
-.voice .label{font-weight:700;color:var(--petrol);font-size:15px;padding-top:12px}
-.voice .label .rule{color:var(--petrol);margin-top:14px;width:120px}
-.voice h3{font-family:var(--body);font-size:16px;font-weight:700;color:var(--ink);margin-bottom:18px}
-.voice blockquote{font-family:var(--display);font-size:clamp(26px,3.1vw,42px);line-height:1.25;color:var(--ink);max-width:24em}
-.voice cite{display:block;font-style:normal;font-weight:700;margin-top:26px;color:var(--petrol)}
-.voice .wrap{position:relative;z-index:1}
-.voice .mark{position:absolute;right:4%;top:10px;font-family:var(--display);font-size:420px;line-height:1;color:rgba(0,82,110,.12);pointer-events:none}
+/* testimonial: arched frame */
+.voice{padding:130px 0;background:radial-gradient(120% 90% at 85% 10%,#0a4a5e 0%,var(--deep) 45%,#021b24 100%);color:#fff;position:relative;overflow:hidden}
+.voice::before{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(100deg,rgba(182,216,226,.035) 0 2px,transparent 2px 28px);pointer-events:none}
+.voice .wrap{position:relative;display:grid;grid-template-columns:.85fr 1.15fr;gap:90px;align-items:center}
+.arch{position:relative;max-width:440px}
+.arch .frame{border-radius:240px 240px 0 0;overflow:hidden;aspect-ratio:4/5;position:relative;z-index:1}
+.arch .frame img{width:100%;height:100%;object-fit:cover;transform:scale(1.1);transition:transform 1.6s cubic-bezier(.2,.8,.2,1)}
+.voice.in .arch .frame img{transform:scale(1)}
+.arch::before{content:"";position:absolute;inset:-18px -18px 18px 18px;border:1px solid rgba(182,216,226,.5);border-radius:258px 258px 0 0}
+.arch .tag{position:absolute;z-index:2;right:-34px;bottom:46px;background:#fff;color:var(--ink);padding:18px 22px;box-shadow:0 24px 50px -20px rgba(0,0,0,.6)}
+.arch .tag b{display:block;font-family:var(--display);font-weight:400;font-size:30px;line-height:1;color:var(--petrol)}
+.arch .tag span{font-size:13.5px;color:var(--muted)}
+.voice .label{display:flex;align-items:center;gap:16px;color:var(--mist);font-weight:600;font-size:15px;margin-bottom:30px}
+.voice .label .rule{width:70px;color:var(--mist)}
+.qmark{width:84px;height:66px;margin-bottom:18px}
+.qmark path{fill:none;stroke:var(--mist);stroke-width:2.5;stroke-dasharray:260;stroke-dashoffset:260;transition:stroke-dashoffset 2s ease .2s}
+.voice.in .qmark path{stroke-dashoffset:0}
+.voice h3{font-family:var(--display);font-weight:400;font-size:clamp(30px,3.4vw,46px);line-height:1.08;margin-bottom:22px;color:#fff}
+.voice blockquote{font-size:clamp(19px,1.6vw,22px);line-height:1.6;color:#d2e5ea;max-width:34em}
+.voice .who{display:flex;align-items:center;gap:18px;margin-top:36px;padding-top:28px;border-top:1px solid rgba(182,216,226,.22)}
+.voice .avatar{width:56px;height:56px;border-radius:50%;background:var(--mist);color:var(--petrol);display:grid;place-items:center;font-family:var(--display);font-size:26px}
+.voice cite{font-style:normal;font-weight:700;font-size:17px;color:#fff;display:block}
+.voice .who span{font-size:14px;color:#a9c6cf}
 
 /* estimate band */
 .band{background:var(--petrol);color:#fff}
@@ -187,6 +244,11 @@ footer .bottom a{color:var(--mist)}
 
 /* responsive */
 @media (max-width:1060px){
+  .hero-main{grid-template-columns:1fr;gap:40px;padding:80px 0 50px}
+  .rail{max-width:520px}
+  .seal{display:none}
+  .voice .wrap{grid-template-columns:1fr;gap:70px}
+  .arch{margin:0 auto 0 18px;width:min(440px,80%)}
   nav.main{position:fixed;inset:0 0 0 auto;width:min(340px,86vw);background:#fff;padding:90px 22px 30px;transform:translateX(100%);transition:transform .3s;box-shadow:-20px 0 50px rgba(0,0,0,.2);overflow:auto}
   nav.main.open{transform:none}
   nav.main ul{flex-direction:column;align-items:stretch}
@@ -195,7 +257,8 @@ footer .bottom a{color:var(--mist)}
   .head-cta{display:none}
   .svc-grid{grid-template-columns:1fr}
   .flood{grid-row:auto;min-height:540px}
-  .quality .wrap,.why .wrap{grid-template-columns:1fr;gap:56px}
+  .quality .wrap{grid-template-columns:1fr;gap:56px}
+  .why .grid{grid-template-columns:1fr}.why .txt{padding:80px 24px}.why .pic{min-height:340px}
   footer .top{grid-template-columns:1fr 1fr}
 }
 @media (max-width:680px){
@@ -204,15 +267,15 @@ footer .bottom a{color:var(--mist)}
   .topbar .wrap{justify-content:center}
   .hero .shade{background:linear-gradient(0deg,rgba(0,0,0,.82) 10%,rgba(0,0,0,.45) 70%,rgba(0,0,0,.3))}
   .logo img{height:56px}
-  .hero .wrap{grid-template-columns:1fr;padding:90px 0 50px}
-  .seal{justify-self:start;width:132px;height:132px}.seal b{font-size:36px}
+  .hero-main{padding:64px 0 40px}
+  .ribbon span{font-size:18px;gap:36px;padding:0 18px}
+  .arch .tag{right:-10px}
   .sec-head{flex-direction:column;align-items:start}
   .tile{grid-template-columns:1fr}
   .tile .pic{height:220px}
   .flood .body{padding:32px 26px}
   .q-visual{padding:0 0 26px 26px}.q-visual .stamp{right:-6px}
   .facts{flex-direction:column}.facts div+div{border-left:0;padding-left:0}
-  .voice .wrap{grid-template-columns:1fr;gap:20px}
   footer .top{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){
@@ -259,22 +322,49 @@ footer .bottom a{color:var(--mist)}
 
 <main>
 <section class="hero" aria-label="Introduction">
-  <div class="layer dull"></div>
-  <div class="layer clean"></div>
+  <div class="stage">
+    <div class="layer dull"></div>
+    <div class="layer clean"></div>
+  </div>
   <div class="wand"></div>
   <div class="shade"></div>
-  <div class="wrap">
+  <canvas id="steam" aria-hidden="true"></canvas>
+  <div class="wrap hero-main">
     <div>
-      <div class="rule"></div>
-      <h1>We Clean It for&nbsp;You</h1>
+      <div class="kicker"><span class="rule"></span>Carpet &amp; Upholstery Cleaning Inc</div>
+      <h1><span class="ln"><span>We Clean It</span></span><span class="ln"><span>for You</span></span></h1>
       <p class="lede">Since 1984, we’ve been serving both residential and commercial customers with high-quality carpet cleaning and flood restoration services.</p>
       <div class="ctas">
         <a class="btn btn-petrol" href="https://www.al-carecarpetcleaning.ca/contact-us">Schedule Your Appointment</a>
-        <a class="btn btn-line" href="tel:780-459-6168"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>780-459-6168</a>
+        <a class="btn btn-line" href="https://www.al-carecarpetcleaning.ca/services">Our Services</a>
       </div>
     </div>
-    <div class="seal" aria-label="Serving since 1984"><div><small>Serving since</small><b>1984</b><small>St. Albert</small></div></div>
+    <aside class="rail" aria-label="Services">
+      <h2>How can we help?</h2>
+      <p class="sub">St. Albert, Edmonton and surrounding areas.</p>
+      <a class="svc" href="https://www.al-carecarpetcleaning.ca/flood-restoration-">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/><path d="M9 15a3 3 0 0 0 3 3"/></svg></span>
+        <span><b>Flood Restoration</b><small>Extract, dry out and restore</small></span>
+        <svg class="arr" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="svc" href="https://www.al-carecarpetcleaning.ca/steam-cleaning">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M8 4c-1.5 1.5 1.5 3 0 4.5M12 3c-1.5 1.5 1.5 3 0 4.5M16 4c-1.5 1.5 1.5 3 0 4.5"/><rect x="3" y="12" width="18" height="8"/><path d="M3 16h18"/></svg></span>
+        <span><b>Steam Cleaning</b><small>Carpets and area rugs</small></span>
+        <svg class="arr" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="svc" href="https://www.al-carecarpetcleaning.ca/upholstery-cleaning">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M5 11V8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3"/><path d="M3 12a2 2 0 0 1 4 0v2h10v-2a2 2 0 0 1 4 0v5H3z"/><path d="M5 17v2M19 17v2"/></svg></span>
+        <span><b>Upholstery Cleaning</b><small>Advanced equipment, quality products</small></span>
+        <svg class="arr" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="call" href="tel:780-459-6168"><span><span>Call us</span><b>780-459-6168</b></span><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></a>
+    </aside>
   </div>
+  <div class="seal" aria-label="Serving since 1984">
+    <svg class="ring" viewBox="0 0 150 150"><defs><path id="circ" d="M75,75 m-62,0 a62,62 0 1,1 124,0 a62,62 0 1,1 -124,0"/></defs><text><textPath href="#circ">SERVING ST. ALBERT SINCE 1984 ◆ LOCALLY OWNED ◆</textPath></text></svg>
+    <div class="core"><div><small>Since</small><b>1984</b></div></div>
+  </div>
+  <div class="ribbon" aria-hidden="true"><div class="track">
+    <span>Carpet Cleaning</span><span>Upholstery Cleaning</span><span>Flood Restoration</span><span>Steam Cleaning</span><span>Free Estimates</span><span>Residential &amp; Commercial</span>
+    <span>Carpet Cleaning</span><span>Upholstery Cleaning</span><span>Flood Restoration</span><span>Steam Cleaning</span><span>Free Estimates</span><span>Residential &amp; Commercial</span>
+  </div></div>
 </section>
 
 <section class="services" id="services">
@@ -339,29 +429,34 @@ footer .bottom a{color:var(--mist)}
 </section>
 
 <section class="why">
-  <div class="wrap">
-    <div>
+  <div class="grid">
+    <div class="txt">
       <h2>Why Choose Al-Care Carpet Cleaning and Upholstery?</h2>
       <p>Whether your home or business is damaged due to a natural disaster or an accident, we work diligently to help your property get back to its original appearance in a timely and an effective manner. We also offer an answering service for your emergency flood responses. <a href="https://www.al-carecarpetcleaning.ca/contact-us">Call us today</a>.</p>
       <p>Here’s why you should choose us for your carpet cleaning needs:</p>
+      <ul class="points" id="points">
+        <li>Over 35 years of experience<span class="line"></span></li>
+        <li>Locally owned and operated<span class="line"></span></li>
+        <li>High-quality services<span class="line"></span></li>
+        <li>Free estimates<span class="line"></span></li>
+      </ul>
     </div>
-    <ul class="points" id="points">
-      <li>Over 35 years of experience<span class="line"></span></li>
-      <li>Locally owned and operated<span class="line"></span></li>
-      <li>High-quality services<span class="line"></span></li>
-      <li>Free estimates<span class="line"></span></li>
-    </ul>
+    <div class="pic"><img src="images/truck-mounted-cleaning.jpg" alt="Truck-mounted carpet cleaning van with hoses running into a St. Albert home"></div>
   </div>
 </section>
 
-<section class="voice" aria-label="Testimonials">
-  <div class="mark" aria-hidden="true">“</div>
+<section class="voice" id="voice" aria-label="Testimonials">
   <div class="wrap">
-    <div class="label">Testimonials<div class="rule"></div></div>
+    <div class="arch">
+      <div class="frame"><img src="images/testimonial-room.jpg" alt="Living room with freshly cleaned carpet and fireplace"></div>
+      <div class="tag"><b>35+ years</b><span>of experience</span></div>
+    </div>
     <figure>
+      <div class="label"><span class="rule"></span>Testimonials</div>
+      <svg class="qmark" viewBox="0 0 84 66" aria-hidden="true"><path d="M34 4C18 10 6 22 6 40c0 12 7 22 17 22 9 0 15-7 15-15 0-9-6-14-14-14-3 0-5 1-6 2 2-12 10-20 18-24zM78 4C62 10 50 22 50 40c0 12 7 22 17 22 9 0 15-7 15-15 0-9-6-14-14-14-3 0-5 1-6 2 2-12 10-20 18-24z"/></svg>
       <h3>Affordable and Highly Recommended!</h3>
-      <blockquote>“Rick and his employees take meticulous care when cleaning my carpets. They always do a fantastic job. I have used their service for many years. Very pleased with their work. Reasonably priced and I would highly recommend!”</blockquote>
-      <cite>Sharon T.</cite>
+      <blockquote>Rick and his employees take meticulous care when cleaning my carpets. They always do a fantastic job. I have used their service for many years. Very pleased with their work. Reasonably priced and I would highly recommend!</blockquote>
+      <div class="who"><div class="avatar" aria-hidden="true">S</div><div><cite>Sharon T.</cite></div></div>
     </figure>
   </div>
 </section>
@@ -420,6 +515,20 @@ const btn=document.querySelector('.menu-btn'),nav=document.getElementById('nav')
 btn.addEventListener('click',()=>{const o=nav.classList.toggle('open');btn.setAttribute('aria-expanded',o)});
 const pts=document.getElementById('points');
 if('IntersectionObserver' in window){new IntersectionObserver((e,o)=>{e.forEach(x=>{if(x.isIntersecting){pts.classList.add('in');o.disconnect()}})},{threshold:.35}).observe(pts)}else pts.classList.add('in');
+const voice=document.getElementById('voice');
+if('IntersectionObserver' in window){new IntersectionObserver((e,o)=>{e.forEach(x=>{if(x.isIntersecting){voice.classList.add('in');o.disconnect()}})},{threshold:.3}).observe(voice)}else voice.classList.add('in');
+// rising steam in the hero
+(function(){const c=document.getElementById('steam');if(!c||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+const x=c.getContext('2d');let W,H,P=[];const dpr=Math.min(devicePixelRatio||1,2);
+function size(){W=c.clientWidth;H=c.clientHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0)}
+size();addEventListener('resize',size);
+function mk(){return{x:W*(.35+Math.random()*.65),y:H+40,r:30+Math.random()*70,v:.25+Math.random()*.45,a:0,life:0,max:500+Math.random()*400,w:Math.random()*6.28}}
+for(let i=0;i<26;i++){const p=mk();p.y=Math.random()*H;p.life=Math.random()*p.max;P.push(p)}
+(function f(){x.clearRect(0,0,W,H);for(const p of P){p.life++;p.y-=p.v;p.w+=.01;p.x+=Math.sin(p.w)*.35;p.r+=.06;
+const t=p.life/p.max,al=Math.sin(Math.PI*Math.min(t,1))*.07;
+const g=x.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r);g.addColorStop(0,'rgba(230,243,247,'+al+')');g.addColorStop(1,'rgba(230,243,247,0)');
+x.fillStyle=g;x.beginPath();x.arc(p.x,p.y,p.r,0,6.29);x.fill();if(t>=1||p.y<-p.r)Object.assign(p,mk())}
+requestAnimationFrame(f)})()})();
 </script>
 </body>
 </html>
